@@ -7,6 +7,7 @@
       <div
         ref="cardRank"
         class="card-rank"
+        :class="cardColor"
       >
         {{ uppercaseRank }}
       </div>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+const suitsVariant = ['club', 'diamond', 'heart', 'spade'];
 const ranksVariant = [
   'a',
   '1',
@@ -40,14 +42,22 @@ export default {
       type: Object,
       required: true,
       validator(val) {
+        const suitIsValid = suitsVariant.some((variant) => variant === val.suit);
         const rankIsValid = ranksVariant.some((variant) => variant === val.rank);
 
-        return rankIsValid;
+        return suitIsValid && rankIsValid;
       },
     },
   },
 
   computed: {
+    cardColor() {
+      const redCards = ['diamond', 'heart'];
+      const isCardRed = redCards.some((card) => card === this.card.suit);
+
+      return isCardRed ? 'color--red' : 'color--black';
+    },
+
     uppercaseRank() {
       return String(this.card.rank).toUpperCase();
     },
@@ -71,5 +81,13 @@ $border: #525252;
   position: absolute;
   width: 100%;
   text-align: center;
+
+  &.color--black {
+    color: black;
+  }
+
+  &.color--red {
+    color: red;
+  }
 }
 </style>
