@@ -44,7 +44,7 @@ describe('BaseCard', () => {
         });
       });
 
-      it('should show the J as an abbreviation of Jack', () => {
+      it('should show the A as an abbreviation of AS', () => {
         expect(wrapper.findComponent({ ref: 'cardRank' }).text()).toBe('A');
       });
 
