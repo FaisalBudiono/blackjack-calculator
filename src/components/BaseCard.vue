@@ -13,6 +13,7 @@
         ref="cardRank"
         class="card-rank"
         :class="cardColor"
+        :style="cardRankStyle"
       >
         {{ uppercaseRank }}
       </div>
@@ -67,6 +68,8 @@ export default {
 
   data() {
     return {
+      cardBoxWidth: 0,
+      cardRankWidth: 0,
       imageList: [
         {
           name: 'club',
@@ -85,6 +88,7 @@ export default {
           src: iconSpade,
         },
       ],
+      rankFontPercentage: 80 / 100,
     };
   },
 
@@ -94,6 +98,16 @@ export default {
       const isCardRed = redCards.some((card) => card === this.card.suit);
 
       return isCardRed ? 'color--red' : 'color--black';
+    },
+
+    cardRankFontSize() {
+      return this.cardBoxWidth * this.rankFontPercentage;
+    },
+
+    cardRankStyle() {
+      return {
+        'font-size': `${this.cardRankFontSize}px`,
+      };
     },
 
     cardSuitImage() {
@@ -107,6 +121,10 @@ export default {
     uppercaseRank() {
       return String(this.card.rank).toUpperCase();
     },
+  },
+
+  mounted() {
+    this.cardBoxWidth = this.$refs.cardBox.offsetWidth;
   },
 };
 </script>
