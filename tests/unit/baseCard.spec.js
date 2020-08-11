@@ -25,6 +25,11 @@ describe('BaseCard', () => {
         const cardRankColor = wrapper.findComponent({ ref: 'cardRank' }).element.classList;
         expect(cardRankColor.contains('color--black')).toBeTruthy();
       });
+
+      it('should render club image', () => {
+        const renderedImage = wrapper.findComponent({ ref: 'cardSuitLeft' }).attributes('src');
+        expect(renderedImage).toMatch(require('@/assets/img/cardSymbol/club.png'));
+      });
     });
 
     describe('AS of Diamond', () => {
@@ -46,6 +51,11 @@ describe('BaseCard', () => {
       it("should show the card rank color red like the diamond's color", () => {
         const cardRankColor = wrapper.findComponent({ ref: 'cardRank' }).element.classList;
         expect(cardRankColor.contains('color--red')).toBeTruthy();
+      });
+
+      it('should render diamond image', () => {
+        const renderedImage = wrapper.findComponent({ ref: 'cardSuitLeft' }).attributes('src');
+        expect(renderedImage).toMatch(require('@/assets/img/cardSymbol/diamond.png'));
       });
     });
   });
