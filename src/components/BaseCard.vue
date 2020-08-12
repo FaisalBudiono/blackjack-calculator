@@ -32,36 +32,41 @@ import iconDiamond from '@/assets/img/cardSymbol/diamond.png';
 import iconHeart from '@/assets/img/cardSymbol/heart.png';
 import iconSpade from '@/assets/img/cardSymbol/spade.png';
 
-const suitsVariant = ['club', 'diamond', 'heart', 'spade'];
-const ranksVariant = [
-  'a',
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  'j',
-  'q',
-  'k',
-];
-
 export default {
   name: 'BaseCard',
 
   props: {
-    card: {
-      type: Object,
+    rank: {
+      type: String,
       required: true,
       validator(val) {
-        const suitIsValid = suitsVariant.some((variant) => variant === val.suit);
-        const rankIsValid = ranksVariant.some((variant) => variant === val.rank);
+        const ranksVariant = [
+          'a',
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9',
+          '10',
+          'j',
+          'q',
+          'k',
+        ];
 
-        return suitIsValid && rankIsValid;
+        return ranksVariant.some((variant) => variant === val);
+      },
+    },
+    suit: {
+      type: String,
+      required: true,
+      validator(val) {
+        const suitsVariant = ['club', 'diamond', 'heart', 'spade'];
+
+        return suitsVariant.some((variant) => variant === val);
       },
     },
   },
@@ -95,7 +100,7 @@ export default {
   computed: {
     cardColor() {
       const redCards = ['diamond', 'heart'];
-      const isCardRed = redCards.some((card) => card === this.card.suit);
+      const isCardRed = redCards.some((card) => card === this.suit);
 
       return isCardRed ? 'color--red' : 'color--black';
     },
@@ -112,14 +117,14 @@ export default {
 
     cardSuitImage() {
       const pickedSuit = this.imageList
-        .filter((imageData) => imageData.name === this.card.suit)
+        .filter((imageData) => imageData.name === this.suit)
         .shift();
 
       return pickedSuit.src;
     },
 
     uppercaseRank() {
-      return String(this.card.rank).toUpperCase();
+      return String(this.rank).toUpperCase();
     },
   },
 

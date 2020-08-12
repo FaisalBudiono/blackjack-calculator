@@ -9,10 +9,8 @@ describe('BaseCard', () => {
       beforeEach(() => {
         wrapper = shallowMount(BaseCard, {
           propsData: {
-            card: {
-              rank: 'j',
-              suit: 'club',
-            },
+            rank: 'j',
+            suit: 'club',
           },
         });
       });
@@ -36,10 +34,8 @@ describe('BaseCard', () => {
       beforeEach(() => {
         wrapper = shallowMount(BaseCard, {
           propsData: {
-            card: {
-              rank: 'a',
-              suit: 'diamond',
-            },
+            rank: 'a',
+            suit: 'diamond',
           },
         });
       });
